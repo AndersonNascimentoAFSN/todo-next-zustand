@@ -1,18 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-
 import { Task } from "@/types/task";
-// import { createTodo } from "../services/todo";
 import { TodoService } from "../services/http/todo";
 
-export function useCreateTodo() {
-  const queryClient = useQueryClient()
+type useCreateTodo = {
+  todo: Task
+}
 
-  return useMutation(
-    ({ todo }: { todo: Task }) => TodoService.createTodo({ todo }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['todoList'])
-      },
-    }
-  )
+export function useCreateTodo({ todo }: useCreateTodo) {
+  return TodoService.createTodo({ todo })
 }

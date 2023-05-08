@@ -3,9 +3,8 @@
 import { useTodoList } from "@/hooks/useTodoList"
 import { TodoItem } from "./TodoItem"
 
-
 export function TodoList() {
-  const { data: todos, isLoading: isLoadingTodo } = useTodoList()
+  // const { data: todos, isLoading: isLoadingTodo } = useTodoList()
 
   return (
     <div className="w-screen flex items-center justify-center">
@@ -19,9 +18,9 @@ export function TodoList() {
           </tr>
         </thead>
         <tbody>
-          {todos?.map((item) => (
+          {/* {todos?.map((item) => (
             <TodoItem item={item} key={item.id} />
-          ))}
+          ))} */}
         </tbody>
       </table>
     </div>

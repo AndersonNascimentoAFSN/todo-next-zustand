@@ -1,17 +1,12 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-// import { completeTodo } from "../services/todo";
 import { TodoService } from "../services/http/todo";
 
-export function useCompleteTodo() {
-  const queryClient = useQueryClient()
+type CompleteTodo = {
+  isCompleted: boolean;
+  id: string;
+}
 
-  return useMutation(
-    ({ isCompleted, id }: { isCompleted: boolean, id: string }) => TodoService.completeTodo({ isCompleted, id }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['todoList'])
-      },
-    }
-  )
+export function useCompleteTodo({isCompleted, id}: CompleteTodo) {
+
+  return  TodoService.completeTodo({ isCompleted, id })
 }

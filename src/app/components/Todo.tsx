@@ -5,10 +5,8 @@ import { useState } from "react"
 
 export function Todo() {
   const [task, setTask] = useState<string>('')
-  const { mutateAsync } = useCreateTodo()
 
   function handleAddTodo() {
-    mutateAsync({ todo: { description: task } })
     setTask('')
   }
 

@@ -2,6 +2,7 @@
 
 import { useCompleteTodo } from "@/hooks/useCompleteTodo"
 import { useRemoveTodo } from "@/hooks/useRemoveTodo"
+
 import { Task } from "@/types/task"
 
 
@@ -10,18 +11,14 @@ type TodoItemProps = {
 }
 
 export function TodoItem({ item }: TodoItemProps) {
-  const { mutateAsync: removeTodo } = useRemoveTodo()
-  const { mutateAsync: completeTodo } = useCompleteTodo()
 
   function handleRemove() {
     if (item?.id) {
-      removeTodo({ id: item?.id })
     }
   }
 
   function handleChecked() {
     if (item.id) {
-      completeTodo({ isCompleted: !item.isCompleted, id: item.id })
     }
   }
 
