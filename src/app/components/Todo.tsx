@@ -1,12 +1,18 @@
 'use client'
 
 import { useCreateTodo } from "@/hooks/useCreateTodo"
+import { useTodoStore } from "@/store/todo"
 import { useState } from "react"
 
 export function Todo() {
   const [task, setTask] = useState<string>('')
 
+  const { addTask } = useTodoStore(state => ({
+    addTask: state.actions.addTask
+  }))
+
   function handleAddTodo() {
+    addTask({ description: task })
     setTask('')
   }
 

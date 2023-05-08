@@ -5,6 +5,6 @@ type useCreateTodo = {
   todo: Task
 }
 
-export function useCreateTodo({ todo }: useCreateTodo) {
-  return TodoService.createTodo({ todo })
+export async function useCreateTodo({ todo }: useCreateTodo) {
+  return await TodoService.createTodo({ todo })
 }

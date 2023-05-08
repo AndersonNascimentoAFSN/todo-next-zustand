@@ -1,5 +1,5 @@
 import { TodoService } from "../services/http/todo";
 
-export function useTodoList() {
-  return  TodoService.getTodoList()
+export async function useTodoList() {
+  return await TodoService.getTodoList()
 }
