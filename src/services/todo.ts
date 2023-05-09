@@ -30,7 +30,7 @@ export async function createTodo({
 
 export async function getTodoList() {
   const todos = await api<Task[]>('http://localhost:3333/todo')
-
+  
   return todos
 }
 

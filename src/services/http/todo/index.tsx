@@ -1,6 +1,7 @@
 
 import { Task } from "@/types/task";
-import { api } from "../../api";
+
+import { ErrorAPI, api } from "../../api";
 
 type CreateTodoProps = {
   todo: Task
@@ -29,9 +30,14 @@ class Todo {
   }
 
   async getTodoList() {
-    const todos = await api<Task[]>('http://localhost:3333/todo')
+    try {
+      const todos = await api<Task[]>('http://localhost:3333/todo')
 
-    return todos
+      return { data: todos, error: null }
+
+    } catch (error) {
+      return { data: [], error: error as ErrorAPI }
+    }
   }
 
   async removeTodo({

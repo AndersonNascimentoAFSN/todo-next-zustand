@@ -22,15 +22,15 @@ type TodoStore = {
   }
 }
 
-interface InitialStateTodoStore {
-  todo: Task[]
-}
+// interface InitialStateTodoStore {
+//   todo: Task[]
+// }
 
-export const initialState: InitialStateTodoStore = {
-  todo: [
-    { id: '', description: '' }
-  ],
-}
+// export const initialState: InitialStateTodoStore = {
+//   todo: [
+//     { id: '', description: '' }
+//   ],
+// }
 
 const createTodoStore = () =>
   create<TodoStore>((set, get) => ({
@@ -62,17 +62,23 @@ const createTodoStore = () =>
         }))
       },
 
-      removeTask: (id: string) => set(({ state }: TodoStore) => ({
-        state:
-          { todo: state.todo.filter((item) => item.id !== id) }
-      })),
+      removeTask: async (id: string) => {
+        await TodoService.removeTodo({
+          id
+        })
 
-      setInitialState() {
-        set((state: TodoStore) => ({
-          ...state,
-          ...initialState
+        set(({ state }: TodoStore) => ({
+          state:
+            { todo: state.todo.filter((item) => item.id !== id) }
         }))
-      }
+      },
+
+      // setInitialState() {
+      //   set((state: TodoStore) => ({
+      //     ...state,
+      //     ...initialState
+      //   }))
+      // }
     }
   }))
 
