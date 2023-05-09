@@ -9,6 +9,16 @@
       "id": "Z5oGRXU",
       "description": "Python",
       "isCompleted": false
+    },
+    {
+      "description": "TypeScript",
+      "isCompleted": false,
+      "id": "oL9R9V1"
+    },
+    {
+      "description": "Go",
+      "isCompleted": false,
+      "id": "Y64A_pw"
     }
   ]
 }

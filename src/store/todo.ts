@@ -16,11 +16,6 @@ type TodoStore = {
   getValues: {
     getTotalTodo: () => number
     getTotalTodoIsCompleted: () => number
-    getTodoStatus: () => {
-      total: number
-      isCompleted: number
-      notCompleted: number
-    }
   },
 
   actions: {
@@ -40,11 +35,6 @@ const createTodoStore = () =>
     getValues: {
       getTotalTodo: () => get().state.todo.length,
       getTotalTodoIsCompleted: () => get().state.todo.filter((item) => item.isCompleted).length,
-      getTodoStatus: () => ({
-        total: get().state.todo.length,
-        isCompleted: get().state.todo.filter((item) => item.isCompleted).length,
-        notCompleted: get().state.todo.length - get().state.todo.filter((item) => item.isCompleted).length,
-      })
     },
 
     actions: {

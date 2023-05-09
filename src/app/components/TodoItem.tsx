@@ -1,7 +1,5 @@
 'use client'
 
-import { useCompleteTodo } from "@/hooks/useCompleteTodo"
-import { useRemoveTodo } from "@/hooks/useRemoveTodo"
 import { useTodoStore } from "@/store/todo"
 
 import { Task } from "@/types/task"
