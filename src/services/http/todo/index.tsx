@@ -31,12 +31,12 @@ class Todo {
 
   async getTodoList() {
     try {
-      const todos = await api<Task[]>('http://localhost:3333/todo')
+      const todos = await api<Task[]>('http://localhost:3333/tod')
 
-      return { data: todos, error: null }
+      return { data: todos, hasError: null }
 
     } catch (error) {
-      return { data: [], error: error as ErrorAPI }
+      return { data: [], hasError: error as ErrorAPI }
     }
   }
 

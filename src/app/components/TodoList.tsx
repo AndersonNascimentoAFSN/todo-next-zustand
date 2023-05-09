@@ -8,11 +8,9 @@ export async function TodoList() {
 
   const todo = await useTodoList()
 
-  console.log('todo', todo)
-
   return (
     <div className="w-screen flex items-center justify-center">
-      <Preloader todo={todo?.data} />
+      <Preloader todo={todo?.data} todoHasError={todo?.hasError} />
 
       <TodoTable />
     </div>

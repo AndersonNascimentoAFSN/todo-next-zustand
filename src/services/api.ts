@@ -1,8 +1,6 @@
 export type ErrorAPI = {
-  error: {
-    code: number
-    message: string
-  }
+  code: number
+  message: string
 }
 
 export async function api<TResponse>(
@@ -19,11 +17,11 @@ export async function api<TResponse>(
     if (isSuccessful) {
       return await response.json() as TResponse;
     } else {
-      return Promise.reject({ error: { message: response.statusText, code: response.status } });
+      return Promise.reject({ message: response.statusText, code: response.status });
     }
 
   } catch (error) {
-    return Promise.reject({error: { message: 'internal server error', code: 500 }});
+    return Promise.reject({ message: 'internal server error', code: 500 });
   }
 }
 

@@ -10,6 +10,7 @@ import { TodoService } from '@/services/http/todo';
 type TodoStore = {
   state: {
     todo: Task[]
+    todoHasError: { message: string, code: number } | null
   },
 
   getValues: {
@@ -32,6 +33,7 @@ const createTodoStore = () =>
   create<TodoStore>((set, get) => ({
     state: {
       todo: [],
+      todoHasError: null,
     },
 
     getValues: {
@@ -53,13 +55,14 @@ const createTodoStore = () =>
         set(({ state }: TodoStore) =>
         ({
           state: {
+            ...state,
             todo: [
               ...state.todo, {
+                id: taskCreated.id,
                 description: taskCreated.description,
                 isCompleted: taskCreated.isCompleted,
-                id: taskCreated.id
               }
-            ]
+            ],
           }
         }))
       },
@@ -71,7 +74,7 @@ const createTodoStore = () =>
 
         set(({ state }: TodoStore) => ({
           state:
-            { todo: state.todo.filter((item) => item.id !== id) }
+            { ...state, todo: state.todo.filter((item) => item.id !== id), }
         }))
       },
     }
