@@ -26,6 +26,7 @@ type TodoStore = {
   actions: {
     addTask: (task: { description: string }) => void
     removeTask: (id: string) => void
+    markCompleteTask: ({ id, isCompleted }: { id: string, isCompleted: boolean }) => void
   }
 }
 
@@ -75,6 +76,27 @@ const createTodoStore = () =>
         set(({ state }: TodoStore) => ({
           state:
             { ...state, todo: state.todo.filter((item) => item.id !== id), }
+        }))
+      },
+
+      markCompleteTask: async ({ id, isCompleted }: { id: string, isCompleted: boolean }) => {
+        await TodoService.completeTodo({
+          id,
+          isCompleted
+        })
+
+        set(({ state }: TodoStore) => ({
+          state:
+          {
+            ...state, todo: state.todo.map((item) => {
+              if (item.id === id) {
+                return {
+                  ...item,
+                  isCompleted
+                }
+              } else return item
+            }),
+          }
         }))
       },
     }

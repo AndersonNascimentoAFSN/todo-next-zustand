@@ -2,6 +2,7 @@
 
 import { useCompleteTodo } from "@/hooks/useCompleteTodo"
 import { useRemoveTodo } from "@/hooks/useRemoveTodo"
+import { useTodoStore } from "@/store/todo"
 
 import { Task } from "@/types/task"
 
@@ -11,14 +12,20 @@ type TodoItemProps = {
 }
 
 export function TodoItem({ item }: TodoItemProps) {
+  const { removeTask, markCompleteTask } = useTodoStore(state => ({
+    removeTask: state.actions.removeTask,
+    markCompleteTask: state.actions.markCompleteTask,
+  }))
 
   function handleRemove() {
     if (item?.id) {
+      removeTask(item.id)
     }
   }
 
   function handleChecked() {
     if (item.id) {
+      markCompleteTask({ id: item.id, isCompleted: !item.isCompleted })
     }
   }
 
