@@ -14,6 +14,12 @@ type TodoStore = {
 
   getValues: {
     getTotalTodo: () => number
+    getTotalTodoIsCompleted: () => number
+    getTodoStatus: () => {
+      total: number
+      isCompleted: number
+      notCompleted: number
+    }
   },
 
   actions: {
@@ -21,16 +27,6 @@ type TodoStore = {
     removeTask: (id: string) => void
   }
 }
-
-// interface InitialStateTodoStore {
-//   todo: Task[]
-// }
-
-// export const initialState: InitialStateTodoStore = {
-//   todo: [
-//     { id: '', description: '' }
-//   ],
-// }
 
 const createTodoStore = () =>
   create<TodoStore>((set, get) => ({
@@ -40,6 +36,12 @@ const createTodoStore = () =>
 
     getValues: {
       getTotalTodo: () => get().state.todo.length,
+      getTotalTodoIsCompleted: () => get().state.todo.filter((item) => item.isCompleted).length,
+      getTodoStatus: () => ({
+        total: get().state.todo.length,
+        isCompleted: get().state.todo.filter((item) => item.isCompleted).length,
+        notCompleted: get().state.todo.length - get().state.todo.filter((item) => item.isCompleted).length,
+      })
     },
 
     actions: {
@@ -72,13 +74,6 @@ const createTodoStore = () =>
             { todo: state.todo.filter((item) => item.id !== id) }
         }))
       },
-
-      // setInitialState() {
-      //   set((state: TodoStore) => ({
-      //     ...state,
-      //     ...initialState
-      //   }))
-      // }
     }
   }))
 
